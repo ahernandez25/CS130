@@ -6,12 +6,12 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
 {
     	Hit hit;
 	float discriminant;
-	
+		
 	float a = dot(ray.direction, ray.direction);
 	float b = dot(ray.direction, (ray.endpoint-center)) * 2;
 	float c = dot((ray.endpoint - center), (ray.endpoint - center)) - (radius * radius);
 
-
+	//std::cout << "a: " << a << std::endl;
 
 	//discriminant = pow(dot(ray.direction, ray.endpoint - center),2) - 
 	//	dot(ray.direction, ray.direction)*(dot(ray.endpoint - center, ray.endpoint - center)
@@ -26,15 +26,15 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
 	}
 	else if(discriminant == 0) {
 		hit.object = this;
-		hit.dist = -b/(2*a);
+		hit.dist = (-b)/(2*a);
 		hit.part = 0;
 	
 	}else{ 
 
 		float t1, t2;
 		
-		t1 = (-b - sqrt(discriminant)) / 2*a;
-		t2 = (-b + sqrt(discriminant)) / 2*a;
+		t1 = (-b - sqrt(discriminant)) / (2*a);
+		t2 = (-b + sqrt(discriminant)) / (2*a);
  		
 		if((t1 < small_t) && (t2 < small_t)){
 			hit.object = NULL;
@@ -65,6 +65,8 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
 
 		} 	
 	}
+    //if (debug_pixel)
+//	std::cout << hit.dist << std::endl;
     return hit;
 }
 
