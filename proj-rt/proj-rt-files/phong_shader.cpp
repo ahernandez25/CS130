@@ -12,6 +12,7 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
     vec3 color;
 	vec3 id;
 	vec3 is;
+	vec3 ia;
 	vec3 r;
 	vec3 l;
 
@@ -35,16 +36,16 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
             }else{
                 max1 = 0;
             }
-	    is += color_specular * world.lights[i]->Emitted_Light(world.lights[i]->position - intersection_point) * pow(max1,specular_power);    
-		
+	    is += color_specular * world.lights[i]->Emitted_Light(world.lights[i]->position - intersection_point) * pow(max1,specular_power);         
 
-	     
+	    //ia += (specular_power*world.lights[i]->Emitted_Light(world.lights[i]->position - intersection_point)) * color_ambient;
+
 
 	}//end for
 
+	ia = world.ambient_color * world.ambient_intensity * color_ambient;
 
 
-
-	color = id + is;
+	color = id + is + ia;
     return color;
 }
