@@ -20,6 +20,26 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
 	for(int i = 0; i < world.lights.size(); i++){
 	    
 	    l = (world.lights[i]->position - intersection_point).normalized();
+	    
+	    Ray shadow_ray;
+	    Hit hit = {NULL, 0, 0};
+	    
+	    
+	    vec3 light_dist = world.lights[i]->position - intersection_point; 
+	    
+		if(world.enable_shadows == true){
+		    shadow_ray.endpoint = intersection_point;
+	    	    shadow_ray.direction = l;
+	    
+	   
+	    	    hit = world.Closest_Intersection(shadow_ray);
+	    	}
+
+	    if(hit.dist < light_dist.magnitude() && hit.dist >= small_t){
+	        continue;
+
+	     } 
+
 	    //DIFFUSE
 	    if(dot(normal,l) > 0){
 			max1 =dot(normal, l); 

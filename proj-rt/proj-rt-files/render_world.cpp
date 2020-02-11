@@ -87,7 +87,7 @@ vec3 Render_World::Cast_Ray(const Ray& ray,int recursion_depth)
  
 //	std::cout << "object dist: " << hit.dist << std::endl;
   
-    if(hit.object != NULL){
+    if(hit.object != NULL && recursion_depth <= recursion_depth_limit){
 	 color = hit.object->material_shader->Shade_Surface(ray, ray.Point(hit.dist),
 	 hit.object->Normal(ray.Point(hit.dist),0),
 	 recursion_depth);
