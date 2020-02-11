@@ -35,16 +35,16 @@ Hit Render_World::Closest_Intersection(const Ray& ray)
 		
 //		std::cout << "\nIN FOR";
 		hit = objects.at(i)->Intersection(ray, 1);
-		if (debug_pixel)
-		    std::cout << "Intersection: " << hit.dist << std::endl;
+		//if (debug_pixel)
+		  //  std::cout << "Intersection: " << hit.dist << std::endl;
 		
 		if (hit.dist >= small_t && hit.dist < min_t) {
 			finalHit.part = hit.part;
 			finalHit.dist = hit.dist;
 			finalHit.object = objects[i];
 			min_t = finalHit.dist;
-			if (debug_pixel)
-			    std::cout << "Min: " << min_t << std::endl;
+			//if (debug_pixel)
+			  //  std::cout << "Min: " << min_t << std::endl;
 		}
 	}
     return finalHit;
@@ -87,12 +87,14 @@ vec3 Render_World::Cast_Ray(const Ray& ray,int recursion_depth)
  
 //	std::cout << "object dist: " << hit.dist << std::endl;
   
+
+	
     if(hit.object != NULL && recursion_depth <= recursion_depth_limit){
 	 color = hit.object->material_shader->Shade_Surface(ray, ray.Point(hit.dist),
 	 hit.object->Normal(ray.Point(hit.dist),0),
 	 recursion_depth);
-//	if (debug_pixel)
-//		std::cout << hit.dist << std::endl;		
+//	if (debug_pixel)`	
+	//std::cout << "slhfh" << std::endl;		
 		//std::cout << color << std::endl;
 
    }else
